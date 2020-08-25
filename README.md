@@ -146,17 +146,42 @@ This is assuming your main application file is called `index.js`. If your main f
     git push heroku master
 ```
 
-If you missed a step just ask for help. Otherwise you should be able to visit your application by saying the following:
+12) Set any ENV Variables that you're app is expecting. (Check your `.env`, e.g., MONGODB_URI).
+
+**View current config var values**
+```bash
+heroku config
+#GITHUB_USERNAME: joesmith
+#OTHER_VAR:    production
+
+heroku config:get GITHUB_USERNAME
+#joesmith
+```
+
+**Set a config var**
+```bash
+heroku config:set GITHUB_USERNAME=joesmith
+#Adding config vars and restarting myapp... done, v12
+#GITHUB_USERNAME: joesmith
+```
+
+**Remove a config var**
+```bash
+heroku config:unset GITHUB_USERNAME
+#Unsetting GITHUB_USERNAME and restarting myapp... done, v13
+```
+
+13) If you missed a step just ask for help. Otherwise you should be able to visit your application by saying the following:
 
 ```bash
     heroku open
 ```
 
-12) If you have a seed task, you can run it now (assuming everything else is working):
+14) If you have a seed task, you can run it now (assuming everything else is working):
 
 ``` bash
 heroku run bash
-> node seed.js
+node seed.js
 ```
 
 ## Debugging Tips
