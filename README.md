@@ -44,7 +44,7 @@ Authenticating is required to allow both the heroku and git commands to operate.
     app.listen(process.env.PORT || 3000)
 ```
 
-6) As of 11/10/20, Heroku, the application hosting service we deploy our projects to, will no longer offer a free option for hosting a MongoDB instance. Please refer to this [guide](https://git.generalassemb.ly/r-sei-12/atlas-hosted-mongodb), to deploy your MongoDB instance to Atlas.
+6) As of 11/10/20, Heroku, the application hosting service we deploy our projects to, will no longer offer a free option for hosting a MongoDB instance. Please refer to this [guide](https://git.generalassemb.ly/la-seir-9-8/atlas-hosted-mongodb), to deploy your MongoDB instance to Atlas.
 
 7) Update your database connection to point to Heroku's database. Open `models/index.js` and add the following to the `mongoose.connect` method:
 
