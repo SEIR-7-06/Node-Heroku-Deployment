@@ -3,18 +3,16 @@
 ### Before you do anything
 1) Stop and commit. Make sure your app is under version control with `git`.  If you're not sure whether your project is under version control yet, you definitely haven't been commiting often enough! But run `git status` to check if your project directory is a repo and `git init` to make it into one if necessary. __Stop and commit your changes.__
 
-In order to deploy your applications you will be deploying your...
-- MongoDB database to a service called [Atlas](https://www.mongodb.com/cloud/atlas)
+In order to deploy your applications you will be deploying your MongoDB database to a service called [Atlas](https://www.mongodb.com/cloud/atlas)
   - To Setup your DB on Atlas, please refer to this [guide](https://git.generalassemb.ly/la-seir-9-8/atlas-hosted-mongodb)
-  - We recommend setting up Atlas first.
-- Node Js/Express code to a service called [Heroku](https://www.heroku.com/)
+  - We recommend following the above guide first to set up Atlas before continuing on to deploy Heroku.
 
-1) Once you've setup your DB with Atlas via the README linked above, sign up for an account with heroku: https://www.heroku.com/
+1) We'll be deploying our Node.js code with a service called Heroku that allows hosting for fullstack applications. Once you've setup your DB with Atlas via the README linked above, sign up for an account with heroku: https://www.heroku.com/
 
-3) Install the heroku cli
+2) Install the heroku cli
 https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 
-Once installed, you can use the heroku command from your command shell.
+3) Once installed, you can use the heroku command from your command shell.
 Log in using the email address and password you used when creating your Heroku account:
 
 ```bash
