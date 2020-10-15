@@ -92,7 +92,6 @@ If your `package.json` is missing any dependencies, you will need to both `insta
     npm install --save mongoose
 ```
 
-<!-- 
 ### Add a start script
 10) Add a `start` script for your application in your `package.json`:
 
@@ -106,8 +105,6 @@ If your `package.json` is missing any dependencies, you will need to both `insta
 ```
 
 This is assuming your main application file is called `server.js`. If your main file is called something else, adjust the script to use your file name.
-
-
 
 ### Deploy!
 
