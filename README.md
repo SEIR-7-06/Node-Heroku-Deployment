@@ -5,15 +5,8 @@
 
 2) Sign up for an account with heroku: https://www.heroku.com/
 
-3) Install the heroku toolbelt (if you haven't done so already):
-
-**OSX users:**
-<a href="https://cli-assets.heroku.com/branches/stable/heroku-osx.pkg">Click this link to download the ToolBelt for OSX</a>  Run the file and follow the prompts to install.
-
-**Ubuntu users:** Run this command from your terminal:
-```bash
-wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-```
+3) Install the heroku cli
+https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 
 Once installed, you can use the heroku command from your command shell.
 Log in using the email address and password you used when creating your Heroku account:
