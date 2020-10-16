@@ -41,10 +41,11 @@ Check to see the new remote created in your repo
 
 5) At this point you should be able to log into Heroku, see your dashboard, and see the application that you created when you ran `heroku create`.
 
-Click on the Application, it might have a goofy name like "aqueous-chamber-05556". From there go to the settings tab and scroll down to the section on Config Vars. Click "Reveal Config Vars". Here is were you are going to add the environment variables that you added to your `.env` file when you were dev'ing locally.
+Click on the Application, it might have a goofy name like "aqueous-chamber-05556". From there go to the settings tab and scroll down to the section on Config Vars. Click "Reveal Config Vars". Here is were you are going to add to heroku the environment variables that you added to your `.env` file when you were dev'ing locally.
 
-- For the first Key add `MONGODB_URI`. For the value field you'll want to grab your connection string for your Atlas Cluster that you created earlier. See [Atlas](https://www.mongodb.com/cloud/atlas) setup docs for how to get your connection string.
+- For the first Key add `MONGODB_URI`. For the value field you'll want to grab your connection string for your Atlas Cluster that you created earlier and make sure to replace `<password> and <database>. See [Atlas](https://www.mongodb.com/cloud/atlas) setup docs for how to get your connection string.
 - For the second Key add `SESSION_SECRET` just as we have it in our `.env` file and pass the same value in the value field.
+- Heroku sets the port environment variable internally so we do not need to set it.
 
 6) Next lets move back to the command line and our code editor and make sure we are ready to deploy.
 
@@ -98,8 +99,7 @@ If your `package.json` is missing any dependencies, you will need to both `insta
 ```javascript
 ...
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "bower install"   // only if you're using Bower
+    "start": "node server.js"
    }
 ...
 ```
@@ -110,7 +110,7 @@ This is assuming your main application file is called `server.js`. If your main 
 
 8) Hold your horses! We've made a lot of changes -- let's STOP AND COMMIT!
 ``` bash
-    git add . -A
+    git add -A
     git commit -m "ready for heroku deploy attempt #1"
 ```
 
