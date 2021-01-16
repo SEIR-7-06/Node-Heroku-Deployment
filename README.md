@@ -3,19 +3,16 @@
 ### Before you do anything
 1) Stop and commit. Make sure your app is under version control with `git`.  If you're not sure whether your project is under version control yet, you definitely haven't been commiting often enough! But run `git status` to check if your project directory is a repo and `git init` to make it into one if necessary. __Stop and commit your changes.__
 
-2) Sign up for an account with heroku: https://www.heroku.com/
+In order to deploy your applications you will be deploying your MongoDB database to a service called [Atlas](https://www.mongodb.com/cloud/atlas)
+  - To Setup your DB on Atlas, please refer to this [guide](https://git.generalassemb.ly/la-seir-9-8/atlas-hosted-mongodb)
+  - We recommend following the above guide first to set up Atlas before continuing on to deploy Heroku.
 
-3) Install the heroku toolbelt (if you haven't done so already):
+1) We'll be deploying our Node.js code with a service called Heroku that allows hosting for fullstack applications. Once you've setup your DB with Atlas via the README linked above, sign up for an account with heroku: https://www.heroku.com/
 
-**OSX users:**
-<a href="https://cli-assets.heroku.com/branches/stable/heroku-osx.pkg">Click this link to download the ToolBelt for OSX</a>  Run the file and follow the prompts to install.
+2) Install the heroku cli
+https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 
-**Ubuntu users:** Run this command from your terminal:
-```bash
-wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-```
-
-Once installed, you can use the heroku command from your command shell.
+3) Once installed, you can use the heroku command from your command shell.
 Log in using the email address and password you used when creating your Heroku account:
 
 ```bash
@@ -37,33 +34,20 @@ Authenticating is required to allow both the heroku and git commands to operate.
 ```bash
     heroku create
 ```
-
-5) In your `server.js` file, modify `app.listen` to use `process.env.PORT` (this will be set, dynamically, by Heroku):
-
-```javascript
-    app.listen(process.env.PORT || 3000)
+Check to see the new remote created in your repo
+```bash
+    git remote -v
 ```
 
-6) As of 11/10/20, Heroku, the application hosting service we deploy our projects to, will no longer offer a free option for hosting a MongoDB instance. Please refer to this [guide](https://git.generalassemb.ly/r-sei-12/atlas-hosted-mongodb), to deploy your MongoDB instance to Atlas.
+5) At this point you should be able to log into Heroku, see your dashboard, and see the application that you created when you ran `heroku create`.
 
-7) Update your database connection to point to Heroku's database. Open `models/index.js` and add the following to the `mongoose.connect` method:
+Click on the Application, it might have a goofy name like "aqueous-chamber-05556". From there go to the settings tab and scroll down to the section on Config Vars. Click "Reveal Config Vars". Here is were you are going to add to heroku the environment variables that you added to your `.env` file when you were dev'ing locally.
 
-```javascript
-    mongoose.connect( process.env.MONGODB_URI || "YOUR CURRENT LOCALHOST DB CONNECTION STRING HERE" );
-```
+- For the first Key add `MONGODB_URI`. For the value field you'll want to grab your connection string for your Atlas Cluster that you created earlier and make sure to replace `<password> and <database>. See [Atlas](https://www.mongodb.com/cloud/atlas) setup docs for how to get your connection string.
+- For the second Key add `SESSION_SECRET` just as we have it in our `.env` file and pass the same value in the value field.
+- Heroku sets the port environment variable internally so we do not need to set it.
 
-##### Deprecated mLab Mongodb Deploy Steps
-~~6) Tell heroku to use the mongolab addon. In your terminal, run:~~
-
-~~heroku addons:create mongolab~~
-
-~~At this point, the command line will probably ask you to enter a credit card number. Follow the prompt.~~
-
-~~Heroku is a "freemium" service. Be careful! They will charge you if you exceed their data limits -- but our projects are tiny so we don't expect to get a lot of traffic!~~
-
-~~7) **Patience...**  If you had to enter in a credit card, you can run `heroku addons` to check/confirm that mongolab was addded. __You may need to wait a few minutes for mogolab to become active.__~~
-
-Congrats! Your application knows what port to run on, and what database to connect to - you're almost all set up to work in "production" on Heroku's servers!
+6) Next lets move back to the command line and our code editor and make sure we are ready to deploy.
 
 STOP AND COMMIT!
 
@@ -87,7 +71,7 @@ STOP AND COMMIT!
 
 ### Confirm your Dependencies
 
-9) Double check your `package.json` to make sure that all your depenedencies are present. If something is missing install it.
+7) Double check your `package.json` to make sure that all your depenedencies are present. If something is missing install it.
 
 For example, here are a bunch of common dependencies (*DO NOT COPY*):  
 ``` javascript
@@ -109,66 +93,30 @@ If your `package.json` is missing any dependencies, you will need to both `insta
     npm install --save mongoose
 ```
 
-<!-- 
 ### Add a start script
 10) Add a `start` script for your application in your `package.json`:
 
 ```javascript
 ...
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "bower install"   // only if you're using Bower
+    "start": "node server.js"
    }
 ...
 ```
 
-This is assuming your main application file is called `index.js`. If your main file is called something else, adjust the script to use your file name.
-
-### Add a Procfile
-11) Create a `Procfile` so that Heroku knows how to run your application:
-    - Make sure you are in your main project directory (the same directory as `index.js`). Then run:  
-``` bash
-    touch Procfile
-    echo "web: npm start" >> Procfile
-```
--->
+This is assuming your main application file is called `server.js`. If your main file is called something else, adjust the script to use your file name.
 
 ### Deploy!
 
-10) Hold your horses! We've made a lot of changes -- let's STOP AND COMMIT!
+8) Hold your horses! We've made a lot of changes -- let's STOP AND COMMIT!
 ``` bash
-    git add . -A
+    git add -A
     git commit -m "ready for heroku deploy attempt #1"
 ```
 
-11) Now we can deploy:
+9) Now we can deploy:
 ``` bash
     git push heroku master
-```
-
-12) Set any ENV Variables that you're app is expecting. (Check your `.env`, e.g., MONGODB_URI).
-
-**View current config var values**
-```bash
-heroku config
-#GITHUB_USERNAME: joesmith
-#OTHER_VAR:    production
-
-heroku config:get GITHUB_USERNAME
-#joesmith
-```
-
-**Set a config var**
-```bash
-heroku config:set GITHUB_USERNAME=joesmith
-#Adding config vars and restarting myapp... done, v12
-#GITHUB_USERNAME: joesmith
-```
-
-**Remove a config var**
-```bash
-heroku config:unset GITHUB_USERNAME
-#Unsetting GITHUB_USERNAME and restarting myapp... done, v13
 ```
 
 13) If you missed a step just ask for help. Otherwise you should be able to visit your application by saying the following:
