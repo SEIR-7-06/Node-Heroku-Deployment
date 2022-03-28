@@ -46,6 +46,17 @@ Click on the Application, it might have a goofy name like "aqueous-chamber-05556
 - For the first Key add `MONGODB_URI`. For the value field you'll want to grab your connection string for your Atlas Cluster that you created earlier and make sure to replace `<password> and <database>. See [Atlas](https://www.mongodb.com/cloud/atlas) setup docs for how to get your connection string.
 - For the second Key add `SESSION_SECRET` just as we have it in our `.env` file and pass the same value in the value field.
 - Heroku sets the port environment variable internally so we do not need to set it.
+- Ensure your node app is configured to point to the Heroku port. You'll want code that looks something like this to set the PORT and to listen on that port.
+```js
+# Towards the top of your main server file
+const PORT = process.env.PORT || 3000;
+```
+```js
+# towards the bottom of your main server file
+app.listen(PORT, () => {
+  console.log('Your app is running on PORT:', PORT)
+})
+```
 
 6) Next lets move back to the command line and our code editor and make sure we are ready to deploy.
 
