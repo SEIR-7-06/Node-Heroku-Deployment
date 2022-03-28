@@ -116,7 +116,7 @@ This is assuming your main application file is called `server.js`. If your main 
 
 9) Now we can deploy:
 ``` bash
-    git push heroku master
+    git push heroku main
 ```
 
 13) If you missed a step just ask for help. Otherwise you should be able to visit your application by saying the following:
