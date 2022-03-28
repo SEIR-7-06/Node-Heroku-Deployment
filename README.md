@@ -48,11 +48,11 @@ Click on the Application, it might have a goofy name like "aqueous-chamber-05556
 - Heroku sets the port environment variable internally so we do not need to set it.
 - Ensure your node app is configured to point to the Heroku port. You'll want code that looks something like this to set the PORT and to listen on that port.
 ```js
-# Towards the top of your main server file
+// Towards the top of your main server file
 const PORT = process.env.PORT || 3000;
 ```
 ```js
-# towards the bottom of your main server file
+// Towards the bottom of your main server file
 app.listen(PORT, () => {
   console.log('Your app is running on PORT:', PORT)
 })
